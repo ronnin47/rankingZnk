@@ -5,7 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 
-export const CargarPj = ({personajes,setPersonajes}) => {
+
+
+export const CargarPj = ({personajes,setPersonajes,lastAddedId,setLastAddedId}) => {
 
  
 
@@ -19,6 +21,11 @@ export const CargarPj = ({personajes,setPersonajes}) => {
     setCargarNombre(event.target.value)
   }
 
+  const [cargarConviccion,setCargarConviccion]=useState("");
+  const handleInputConviccion=(event)=>{
+    setCargarConviccion(event.target.value)
+  }
+
   const [cargarDominio,setCargarDominio]=useState("");
   const handleInputDominio=(event)=>{
     setCargarDominio(event.target.value)
@@ -30,11 +37,11 @@ export const CargarPj = ({personajes,setPersonajes}) => {
   }
 
   const cargarPersonaje=()=>{
-    console.log(`funciona cargar personaje 
+    /*console.log(`funciona cargar personaje 
       Nombre:${cargarNombre} 
       Dominio: ${cargarDominio} 
       Ken:${cargarKen}
-      Imagen:${imagen}`);
+      Imagen:${imagen}`);*/
 
 
 
@@ -43,6 +50,7 @@ export const CargarPj = ({personajes,setPersonajes}) => {
         nombre: cargarNombre,
         dominio: cargarDominio,
         ken: cargarKen || 0,
+        conviccion: cargarConviccion || "",
         imagen: imagen,
       }
       
@@ -50,8 +58,12 @@ export const CargarPj = ({personajes,setPersonajes}) => {
       
       setCargarNombre("");
       setCargarDominio("");
+      setCargarConviccion("");
       setCargarKen("");
       setImagen("/imagenBase.jpeg");
+      setLastAddedId(newPersonaje.id)
+      console.log("lastt id "+newPersonaje.id)
+     
       //console.log(personajes)
   }
 
@@ -86,6 +98,7 @@ export const CargarPj = ({personajes,setPersonajes}) => {
             <input type="text" placeholder="ingrese nombre de persoanje" value={cargarNombre} onChange={handleInputNombre}/>
             <input type="text" placeholder="ingrese dominio" value={cargarDominio}  onChange={handleInputDominio}/>
             <input type="number" placeholder="ingrese Ken" value={cargarKen}  onChange={handleInputKen}/>
+            <input type="text" placeholder="ingresa la conviccion" value={cargarConviccion}  onChange={handleInputConviccion}/>
             <Button variant="outline-warning" style={{width:"auto", marginLeft:"9em"}} onClick={cargarPersonaje}>Cargar al ranking</Button>
           </div>
     

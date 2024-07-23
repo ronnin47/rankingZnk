@@ -20,12 +20,16 @@ export const App=()=> {
   localStorage.setItem("personajes",JSON.stringify(personajes))
  },[personajes])
 
+ const [lastAddedId, setLastAddedId] = useState(null);
+
+
+ const sortedPersonajes = personajes.sort((a, b) => b.ken - a.ken);
 
   return (
     <>
      <Nava tituloNav={" Ranking ZNK"}></Nava>
-     <CargarPj personajes={personajes} setPersonajes={setPersonajes}></CargarPj>
-     <Ranking personajes={personajes} setPersonajes={setPersonajes}></Ranking>
+     <CargarPj personajes={personajes} setPersonajes={setPersonajes} lastAddedId={lastAddedId} setLastAddedId={setLastAddedId}></CargarPj>
+     <Ranking personajes={sortedPersonajes} setPersonajes={setPersonajes}lastAddedId={lastAddedId}></Ranking>
     </>
   )
 }
