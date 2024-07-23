@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
 
-export const CartaPj = ({ onClose, id, imagen, nombre,dominio,ken, personajes,conviccion, setPersonajes }) => {
+export const CartaPj = ({ onClose, id, imagen, setImagen, nombre,dominio,ken, personajes,conviccion, setPersonajes }) => {
 
 
 const informacionPj=`${nombre}  ${dominio}        KEN:${ken}`
 
   const [info,setInfo]=useState(informacionPj)
+  const imgCartaPjRef = useRef(null);
+
+  const [newImagen,setNewImagen]=useState(imagen)
   
   
   
@@ -52,7 +55,7 @@ const informacionPj=`${nombre}  ${dominio}        KEN:${ken}`
           dominio: dominioCartaPj,
           ken: kenCartaPj || 0,
           conviccion: conviccionCartaPj || "",
-          imagen: imagen,
+          imagen: newImagen || imagen,
         }
 
 
@@ -72,6 +75,22 @@ const informacionPj=`${nombre}  ${dominio}        KEN:${ken}`
   }
 
 
+
+  //para la imagen
+  const handleImageUpload = () => {
+     imgCartaPjRef.current.click();
+  };
+  
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {     
+      setNewImagen(reader.result); 
+    };
+    reader.readAsDataURL(file);
+  };
+
+
   return (
     <Modal show={true} onHide={onClose}>
 
@@ -84,7 +103,7 @@ const informacionPj=`${nombre}  ${dominio}        KEN:${ken}`
       <Modal.Body className='modalCartaPjBody' style={{backgroundColor:"black", color:"aliceblue"}}>
       <Card.Img
             variant="top"
-            src={imagen}
+            src={newImagen || imagen}
             style={{ maxWidth: "100%", maxHeight: "100%"}}
             className='imagenCartaPj'
           />
@@ -101,6 +120,10 @@ const informacionPj=`${nombre}  ${dominio}        KEN:${ken}`
       </Modal.Body>
       
       <Modal.Footer style={{backgroundColor:"black", color:"aliceblue"}}>
+      <Button variant="outline-info" onClick={handleImageUpload} >
+          Cargar imagen
+        </Button>
+        <input type="file" accept="image/*" ref={imgCartaPjRef} style={{ display: 'none' }} onChange={handleFileChange} />
         <Button variant="outline-danger" onClick={onClose}>
           Cerrar
         </Button>

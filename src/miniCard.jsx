@@ -10,7 +10,7 @@ import {CartaPj } from './cartaPj';
 
 
 
-export const MiniCard = ({ id, nombre, dominio, ken, imagen,conviccion, personajes, setPersonajes, focus}) => {
+export const MiniCard = ({ id, nombre, dominio, ken, imagen, setImagen,conviccion, personajes, setPersonajes, focus}) => {
 
   const cardRef = useRef(null); // Crear una referencia para la tarjeta
     /*console.log(`
@@ -115,7 +115,7 @@ const handleCloseCartaPj = () => {
            
           </Card.Body>
           {showCartaPj && (
-        <CartaPj onClose={handleCloseCartaPj} id={id} imagen={imagen} nombre={nombre} dominio={dominio} ken={ken} conviccion={conviccion} personajes={personajes} setPersonajes={setPersonajes}/>
+        <CartaPj onClose={handleCloseCartaPj} id={id} imagen={imagen} setImagen={setImagen} nombre={nombre} dominio={dominio} ken={ken} conviccion={conviccion} personajes={personajes} setPersonajes={setPersonajes}/>
         )}
          
         </Card>

@@ -13,6 +13,8 @@ export const App=()=> {
     const localPersonajes = localStorage.getItem('personajes');
     return localPersonajes ? JSON.parse(localPersonajes) : [];
   });
+
+  const [imagen,setImagen]=useState("/imagenBase.jpeg")
   
 //cada vez que persoanjes tiene un cambio lo guarda en storage
  useEffect(()=>{
@@ -28,8 +30,8 @@ export const App=()=> {
   return (
     <>
      <Nava tituloNav={" Ranking ZNK"}></Nava>
-     <CargarPj personajes={personajes} setPersonajes={setPersonajes} lastAddedId={lastAddedId} setLastAddedId={setLastAddedId}></CargarPj>
-     <Ranking personajes={sortedPersonajes} setPersonajes={setPersonajes}lastAddedId={lastAddedId}></Ranking>
+     <CargarPj personajes={personajes} setPersonajes={setPersonajes} lastAddedId={lastAddedId} setLastAddedId={setLastAddedId} imagen={imagen} setImagen={setImagen}></CargarPj>
+     <Ranking personajes={sortedPersonajes} setPersonajes={setPersonajes}lastAddedId={lastAddedId} imagen={imagen} setImagen={setImagen}></Ranking>
     </>
   )
 }

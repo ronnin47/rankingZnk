@@ -7,14 +7,14 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 
-export const CargarPj = ({personajes,setPersonajes,lastAddedId,setLastAddedId}) => {
+export const CargarPj = ({personajes,setPersonajes,lastAddedId,setLastAddedId,imagen, setImagen}) => {
 
  
 
 
  const inputFileRef = useRef(null);
 
- const [imagen,setImagen]=useState("/imagenBase.jpeg")
+ 
 
  const [cargarNombre,setCargarNombre]=useState("");
   const handleInputNombre=(event)=>{
