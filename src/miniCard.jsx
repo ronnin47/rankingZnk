@@ -1,124 +1,152 @@
 
 import Card from 'react-bootstrap/Card';
 import 'animate.css';
-import { useEffect,useState, useRef} from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { CartaPj } from './cartaPj';
+import '../css/wickedcss.min.css';
+import { Buffer } from 'buffer';
 
-import {CartaPj } from './cartaPj';
+export const MiniCard = ({ imagenBase, setImagenBase, rank, idpersonaje, nombre, dominio, ken, imagen, conviccion, personajes, setPersonajes, focus }) => {
 
-
-
-
-
-
-export const MiniCard = ({ id, nombre, dominio, ken, imagen, setImagen,conviccion, personajes, setPersonajes, focus}) => {
-
-  const cardRef = useRef(null); // Crear una referencia para la tarjeta
-    /*console.log(`
-      id: ${id}
-      nombre: ${nombre}
-      dominio: ${dominio}
-      ken: ${ken}
-      imagen: ${imagen}
-    `);
-    */
-    const index = personajes.findIndex(pj => pj.id === id);
-
-    useEffect(() => {
-      if (focus === id && cardRef.current) {
-        // Desplazar la tarjeta al centro de la vista si coincide con el ID de enfoque
-        cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }, [focus, id]);
-
-//console.log("ultimo id en componennete minicard: "+focus);
-
- const [classBrillosDestino,setClassBrillosDestino]=useState("numeroRanking")
- const [classCardDestino,setClassCardDestino]=useState("shadowBody ")
+  const [classBrillosDestino, setClassBrillosDestino] = useState("numeroRanking");
+  const [classCardDestino, setClassCardDestino] = useState("shadowBody");
+  const [showCartaPj, setShowCartaPj] = useState(false);
 
 
- useEffect(() => {
-  if (ken >= 400) {
-    console.log(`El personaje es una estrella del destino con ${ken}`);
-    setClassBrillosDestino("numeroRanking classEstrella");
-    setClassCardDestino("classCardDestino")
 
-  } else {
-    setClassBrillosDestino("numeroRanking");
-    setClassCardDestino("shadowBody ")
-  }
-}, [ken]);
 
- //console.log("contenido de class: "+classBrillosDestino)
+  /************************************************ */
+//esta en base 64 la imagen de personajes, pj.imagen
+ // console.log("CONTENIDO DE pj.IMAGEN: "+JSON.stringify(imagen))
+  const cardRef = useRef(null);
+  //un nuevo state para la imagen que tiene que mostrarse en la card
+  const [imageSrc, setImageSrc] = useState(imagenBase);
 
-/*
- const arbirCartaPj=()=>{
-  console.log("funciona abrir carta pj")
-  return(
-    <>
-    <CartaPj></CartaPj>
-    </>
-  )
+
+
+ 
   
-      
- }
- */
-
-
-
- const [showCartaPj, setShowCartaPj] = useState(false);
-
-
  
- const handleCardClick = () => {
-  console.log("funciona abrir carta pj");
-  setShowCartaPj(true); // Mostrar CartaPj al hacer clic
-};
+  useEffect(() => {
+    if (imagen && imagen.data) {
+      let imageData = imagen.data;
 
-const handleCloseCartaPj = () => {
-  setShowCartaPj(false); // Ocultar CartaPj
-};
+      // Depura el valor de imageData
+      //console.log('Datos de imagen antes de limpiarlos:', imageData);
+      imageData =Buffer.from(imageData).toString('base64')
+      //console.log("IMAGEDATA: "+imageData)
+      // Verifica si los datos ya están en formato base64 con prefijo
+      if (typeof imageData === 'string' && imageData.startsWith('dataimage/jpegbase64/')) {
+        // Si es una cadena base64 con prefijo, elimina el prefijo
+        imageData = imageData.replace('dataimage/jpegbase64/', '');
+       // console.log("paso por aca y lo limpio: "+imageData)
+        
+      }
 
- 
+      // Verifica si imageData ya es una cadena base64 limpia
+      // Si imageData es binario, conviértelo a base64
+      const base64String = typeof imageData === 'string'
+        ? imageData // Ya está en formato base64 limpio
+        : Buffer.from(imageData).toString('base64'); // Convertir binario a base64
+
+      const mimeType = 'image/jpeg'; // Cambia esto si el tipo de imagen es diferente
+      const url = `data:${mimeType};base64,/${base64String}`;
+     // console.log("URL Generada: " + url);
+
+      // Actualiza el estado de la imagen
+      setImageSrc(url);
+      // Intenta crear una imagen para verificar si es válida
+    const img = new Image();
+    img.src = url;
+    img.onload = () => {
+      // Si la imagen se carga correctamente, actualiza el estado
+      setImageSrc(url);
+    };
+    img.onerror = () => {
+      // Si ocurre un error al cargar la imagen, usa la imagen base predeterminada
+      setImageSrc(imagenBase);
+    };
+    } else {
+      setImageSrc(imagenBase); // Imagen predeterminada si no hay datos
+    }
+  }, [imagen]); 
+
+
+  /****************************** */
 
 
 
-    return (
-      <div className='cartas' >
-        <p className={`${classBrillosDestino}`} style={{ fontFamily: "impact", textAlign: "center"}}>{index+1}</p>
-        <Card ref={cardRef} style={{ width: '6em', border: "6px solid black" }} className={`animate__animated animate__fadeInTopLeft ${classCardDestino}`}>
-          <Card.Img
-            onClick={handleCardClick}
-            variant="top"
-            src={imagen}
-            style={{ maxWidth: "100%", maxHeight: "100%"}}
-          />
-          <Card.Body
-            onClick={handleCardClick}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundImage: "linear-gradient(to right, #FDF5E6, #FFDAB9, #FFE4B5, #FFDAB9, #FDF5E6)",
-              minHeight: "100%",
-              width: "100%",
-              height: "100%",
-              border: "3px solid orange"
-            }}
-          >
-            <Card.Title style={{ textAlign: "center", margin: "0px" }}>{nombre}</Card.Title>
-            <p style={{ fontFamily: "impact", textAlign: "center", margin: "0", fontSize: "0.9rem" }}>{dominio}</p>
-            <p style={{ fontFamily: "impact", textAlign: "center", margin: "0", fontSize: "2rem" }}>{ken}</p>
-            
+//FOCUS Y ESTYLES PARA LA CARD
+  useEffect(() => {
+    if (focus === idpersonaje && cardRef.current) {
+      cardRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [focus, idpersonaje]);
 
-            
-           
-          </Card.Body>
-          {showCartaPj && (
-        <CartaPj onClose={handleCloseCartaPj} id={id} imagen={imagen} setImagen={setImagen} nombre={nombre} dominio={dominio} ken={ken} conviccion={conviccion} personajes={personajes} setPersonajes={setPersonajes}/>
-        )}
-         
-        </Card>
-      </div>
-    );
+  useEffect(() => {
+    if (ken >= 400) {
+      setClassBrillosDestino("numeroRanking classEstrella");
+      setClassCardDestino("classCardDestino");
+      console.log("es una estrella del destino")
+    } else {
+      setClassBrillosDestino("numeroRanking");
+      setClassCardDestino("shadowBody");
+    }
+  }, [ken]);
+
+  const handleCardClick = () => {
+    setShowCartaPj(true);
   };
+
+  const handleCloseCartaPj = () => {
+    setShowCartaPj(false);
+  };
+
+  return (
+    <div className='cartas'>
+      <p className={classBrillosDestino} style={{ fontFamily: "impact", textAlign: "center" }}>{rank}</p>
+      <Card ref={cardRef} style={{ width: '6em', border: "6px solid black" }} className={`animate__animated animate__fadeInTopLeft ${classCardDestino}`}>
+        <Card.Img
+          onClick={handleCardClick}
+          variant="top"
+          src={imageSrc}
+          alt="imagen"
+          style={{ maxWidth: "100%", maxHeight: "100%" }}
+        />
+        <Card.Body
+          onClick={handleCardClick}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundImage: "linear-gradient(to right, #FDF5E6, #FFDAB9, #FFE4B5, #FFDAB9, #FDF5E6)",
+            minHeight: "100%",
+            width: "100%",
+            height: "100%",
+            border: "3px solid orange"
+          }}
+        >
+          <Card.Title style={{ textAlign: "center", margin: "0px" }}>{nombre}</Card.Title>
+          <p style={{ fontFamily: "impact", textAlign: "center", margin: "0", fontSize: "0.9rem" }}>{dominio}</p>
+          <p style={{ fontFamily: "impact", textAlign: "center", margin: "0", fontSize: "2rem" }}>{ken}</p>
+        </Card.Body>
+        {showCartaPj && (
+          <CartaPj
+            onClose={handleCloseCartaPj}
+            idpersonaje={idpersonaje}
+            imageSrc={imageSrc}
+            setImageSrc={setImageSrc}
+            setImagenBase={setImagenBase}
+            nombre={nombre}
+            dominio={dominio}
+            ken={ken}
+            conviccion={conviccion}
+            personajes={personajes}
+            setPersonajes={setPersonajes}
+          />
+        )}
+      </Card>
+    </div>
+  );
+};

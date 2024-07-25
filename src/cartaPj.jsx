@@ -2,16 +2,14 @@ import React, { useState, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
+import axios from 'axios';
 
-export const CartaPj = ({ onClose, id, imagen, setImagen, nombre,dominio,ken, personajes,conviccion, setPersonajes }) => {
+export const CartaPj = ({ onClose, idpersonaje, imageSrc,setImageSrc, setImagenBase, nombre,dominio,ken, personajes,conviccion, setPersonajes }) => {
 
 
-const informacionPj=`${nombre}  ${dominio}        KEN:${ken}`
-
-  const [info,setInfo]=useState(informacionPj)
   const imgCartaPjRef = useRef(null);
 
-  const [newImagen,setNewImagen]=useState(imagen)
+  const [newImagen,setNewImagen]=useState(imageSrc)
   
   
   
@@ -35,44 +33,55 @@ const informacionPj=`${nombre}  ${dominio}        KEN:${ken}`
   }
 
 
-  const guardarCambiosPj=()=>{
-    console.log("funciona boton guardar cambios Pj")
-    console.log(id)
-/*
-     const newPersonaje={
-        id: id,
-        nombre: nombreCartaPj,
-        dominio: dominioCartaPj,
-        ken: kenCartaPj || 0,
-        imagen: imagen,
+  const guardarCambiosPj = async () => {
+    console.log("Funciona el botón guardar cambios Pj");
+    console.log(idpersonaje);
+  
+    const newPersonaje = {
+      idpersonaje: idpersonaje,
+      nombre: nombreCartaPj,
+      dominio: dominioCartaPj,
+      ken: kenCartaPj || 0,
+      conviccion: conviccionCartaPj || "",
+      imagen: newImagen,
+    };
+  
+    try {
+      // Enviar la solicitud de actualización al servidor
+      await axios.put('http://localhost:4000/update-personaje', newPersonaje, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-     }
-*/
-
-        const newPersonaje={
-          id: id,
-          nombre: nombreCartaPj,
-          dominio: dominioCartaPj,
-          ken: kenCartaPj || 0,
-          conviccion: conviccionCartaPj || "",
-          imagen: newImagen || imagen,
-        }
-
-
-       const updatedPersonajes = personajes.map((pj) => {
-        if (pj.id === id) {
-          console.log("personaje encontrado");
+      try {
+        const response = await axios.get('http://localhost:4000/personajes');
+        setPersonajes(response.data);
+        console.log("PERSOANJES RECUPERADOS TRAS GUARDAR")
+      
+      } catch (error) {
+        console.error('Error al obtener los personajes:', error);
+      }
+  /*
+  // Actualizar el estado local
+      const updatedPersonajes = personajes.map((pj) => {
+        if (pj.idpersonaje === idpersonaje) {
+          console.log("Personaje encontrado");
           return newPersonaje; // Reemplazar el personaje encontrado con newPersonaje
         }
         return pj; // Retornar el personaje sin cambios
       });
-
-       
-    
       setPersonajes(updatedPersonajes);
-
-    onClose()
-  }
+     // setImageSrc(newImagen)
+   
+      console.log("Personaje actualizado en el estado local");
+*/
+      // Opcional: Cerrar el modal o realizar cualquier otra acción necesaria
+      cerrar();
+    } catch (error) {
+      console.error('Error al actualizar el personaje:', error.message);
+    }
+  };
 
 
 
@@ -91,10 +100,24 @@ const informacionPj=`${nombre}  ${dominio}        KEN:${ken}`
   };
 
 
-  return (
-    <Modal show={true} onHide={onClose}>
+const [fade,setFade]=useState(false)
 
-      <Modal.Header closeButton style={{backgroundColor:"black", color:"aliceblue"}}>
+const cerrar=()=>{
+  console.log("paso por aca")
+  setFade(true) 
+  setTimeout(() => {
+
+    setFade(false); 
+    onClose()
+  }, 700);
+}
+
+
+  return (
+    <Modal show={true} onHide={cerrar}>
+       
+       <div className={`modalus ${fade==true ? 'fadeOut' : 'fadeIn'}`}>
+       <Modal.Header closeButton style={{backgroundColor:"black", color:"aliceblue"}}>
         <Modal.Title>
           <p style={{textAlign:"center", fontFamily:"cursive"}}>{nombre}</p>
         </Modal.Title>
@@ -103,7 +126,7 @@ const informacionPj=`${nombre}  ${dominio}        KEN:${ken}`
       <Modal.Body className='modalCartaPjBody' style={{backgroundColor:"black", color:"aliceblue"}}>
       <Card.Img
             variant="top"
-            src={newImagen || imagen}
+            src={newImagen}
             style={{ maxWidth: "100%", maxHeight: "100%"}}
             className='imagenCartaPj'
           />
@@ -124,7 +147,7 @@ const informacionPj=`${nombre}  ${dominio}        KEN:${ken}`
           Cargar imagen
         </Button>
         <input type="file" accept="image/*" ref={imgCartaPjRef} style={{ display: 'none' }} onChange={handleFileChange} />
-        <Button variant="outline-danger" onClick={onClose}>
+        <Button variant="outline-danger" onClick={cerrar}>
           Cerrar
         </Button>
         <Button variant="outline-success" onClick={guardarCambiosPj}>
@@ -132,6 +155,9 @@ const informacionPj=`${nombre}  ${dominio}        KEN:${ken}`
         </Button>
         
       </Modal.Footer>
+        
+       </div>
+      
     </Modal>
   );
 };

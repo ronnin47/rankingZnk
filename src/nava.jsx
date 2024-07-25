@@ -1,39 +1,11 @@
 
-/*
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-
-export const Nava=({tituloNav})=> {
-  return (
-    <>
-      <Navbar className="navbar-dark bg-dark">
-    <Container>
-      <Navbar.Brand href="#home" className="text-light">
-        <img
-          alt=""
-          src="./src/assets/mitama.svg"
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-        />{tituloNav}
-      </Navbar.Brand>
-    </Container>
-  </Navbar>
-    </>
-  );
-}
-
-
-*/
-
-
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 
-
+import '../css/wickedcss.min.css';
 
 export const Nava= ({tituloNav})=> {
 
@@ -43,10 +15,10 @@ export const Nava= ({tituloNav})=> {
         <Navbar.Brand href="#">
          <img
           alt=""
-          src="./src/assets/mitamaDorada.svg"
+          src="./mitamaDorada.svg"
           width="30"
           height="30"
-          className="d-inline-block align-top"
+          className="d-inline-block align-top barrelRoll"
           style={{marginLeft:"3em"}}
         />
         {tituloNav}</Navbar.Brand>
