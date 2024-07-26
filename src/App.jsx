@@ -20,6 +20,8 @@ useEffect(() => {
   const fetchPersonajes = async () => {
     try {
       //const response = await axios.get('http://localhost:4000/personajes');
+      const url = `${process.env.REACT_APP_BACKEND_URL}/personajes`;
+      console.log(`Fetching from: ${url}`);
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/personajes`);
       console.log(`Entro en el tray y trajo: ${response.data}`)
       setPersonajes(response.data);
