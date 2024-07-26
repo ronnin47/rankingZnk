@@ -35,7 +35,7 @@ const pool = new Pool({
   port: 5432,
 });
 */
-/*
+
 //CONFIGURACION A LA BASE DE DATOS POSTGRESQL EN RENDER 
 const pool = new Pool({
   user: 'znkrankingbbbdd_user',          // Reemplaza con tu usuario de PostgreSQL
@@ -44,8 +44,8 @@ const pool = new Pool({
   password: 'xkZPYQ7QNLIMvYeWNwXQH4K7wHnAMCgQ',   // Reemplaza con tu contraseña de PostgreSQL
   port: 5432,
 });
-*/
-/*
+
+
 // Verificar conexión a la base de datos
 async function checkDatabaseConnection() {
   try {
@@ -58,12 +58,12 @@ async function checkDatabaseConnection() {
 }
 // Llama a la función de verificación de conexión al iniciar el servidor
 checkDatabaseConnection();
-*/
+
 app.use(express.json());
 
 
 
-/*
+
 //CONSULTAS A LA BBDD
 //GET ok!!
 // Ruta para obtener todos los personajes
@@ -132,7 +132,7 @@ app.put('/update-personaje', async (req, res) => {
   }
 });
 
-*/
+
 
 
 
@@ -149,7 +149,7 @@ app.get('/*', (req, res) => {
 });
 
 
-/*
+
 // Manejar el cierre del servidor
 process.on('SIGTERM', async () => {
   console.log('Recibiendo señal de terminación. Cerrando la conexión a la base de datos...');
@@ -157,4 +157,3 @@ process.on('SIGTERM', async () => {
   console.log('Conexión a la base de datos cerrada.');
   process.exit(0);
 });
-*/
