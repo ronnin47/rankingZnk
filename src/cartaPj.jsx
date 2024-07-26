@@ -48,14 +48,15 @@ export const CartaPj = ({ onClose, idpersonaje, imageSrc,setImageSrc, setImagenB
   
     try {
       // Enviar la solicitud de actualización al servidor
-      await axios.put('http://localhost:4000/update-personaje', newPersonaje, {
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/update-personaje`, newPersonaje, { 
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
       try {
-        const response = await axios.get('http://localhost:4000/personajes');
+        //const response = await axios.get('http://localhost:4000/personajes');
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/personajes`);
         setPersonajes(response.data);
         console.log("PERSOANJES RECUPERADOS TRAS GUARDAR")
       

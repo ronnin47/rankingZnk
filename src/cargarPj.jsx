@@ -52,7 +52,7 @@ const cargarPersonaje = async () => {
   };
 
   try {
-    const response = await axios.post('http://localhost:4000/insert-personaje', newPersonaje, {
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/insert-personaje`, newPersonaje, { 
       headers: {
         'Content-Type': 'application/json', // Asegúrate de que el encabezado Content-Type sea application/json
       },
@@ -72,7 +72,8 @@ const cargarPersonaje = async () => {
   //lalam a la peticion 
       const fetchPersonajes = async () => {
         try {
-          const response = await axios.get('http://localhost:4000/personajes');
+          //const response = await axios.get('http://localhost:4000/personajes');
+          const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/personajes`);
           setPersonajes(response.data);
         
         } catch (error) {

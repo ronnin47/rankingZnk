@@ -19,7 +19,8 @@ const [personajes, setPersonajes] = useState([])
 useEffect(() => {
   const fetchPersonajes = async () => {
     try {
-      const response = await axios.get('http://localhost:4000/personajes');
+      //const response = await axios.get('http://localhost:4000/personajes');
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/personajes`);
       setPersonajes(response.data);
     
     } catch (error) {
