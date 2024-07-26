@@ -20,7 +20,7 @@ useEffect(() => {
   const fetchPersonajes = async () => {
     try {
       //const response = await axios.get('http://localhost:4000/personajes');
-      const response = await axios.get('http://localhost:10000/personajes');
+      const response = await axios.get('https://rankingznk.onrender.com//personajes');
       
       
       //const url = `${process.env.REACT_APP_BACKEND_URL}/personajes`;
