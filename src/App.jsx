@@ -20,11 +20,24 @@ useEffect(() => {
   const fetchPersonajes = async () => {
     try {
       //const response = await axios.get('http://localhost:4000/personajes');
-      const url = `${process.env.REACT_APP_BACKEND_URL}/personajes`;
-      console.log(`Fetching from: ${url}`);
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/personajes`);
-      console.log(`Entro en el tray y trajo: ${response.data}`)
-      console.log('Backend URL:', process.env.REACT_APP_BACKEND_URL);
+      const response = await axios.get('http://localhost:10000/personajes');
+      
+      
+      //const url = `${process.env.REACT_APP_BACKEND_URL}/personajes`;
+      //console.log(`Fetching from: ${url}`);
+      //const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/personajes`);
+      
+      
+      //const response = await axios.get(`${await import.meta.env.VITE_BACKEND_URL}/personajes`);
+
+
+
+      //const response = await axios.get(`${url}/personajes`);
+      
+      //console.log(`Entro en el tray y trajo: ${response.data}`)
+      //console.log('Backend URL:', process.env.REACT_APP_BACKEND_URL);
+     // console.log('Backend URL:', import.meta.env.VITE_BACKEND_URL);
+     
       setPersonajes(response.data);
     
     } catch (error) {
