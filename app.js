@@ -35,9 +35,8 @@ const pool = new Pool({
   port: 5432,
 });
 */
-
-//RENDER 
-
+/*
+//CONFIGURACION A LA BASE DE DATOS POSTGRESQL EN RENDER 
 const pool = new Pool({
   user: 'znkrankingbbbdd_user',          // Reemplaza con tu usuario de PostgreSQL
   host: 'dpg-cqhe8b88fa8c73br4p10-a',
@@ -45,8 +44,8 @@ const pool = new Pool({
   password: 'xkZPYQ7QNLIMvYeWNwXQH4K7wHnAMCgQ',   // Reemplaza con tu contraseña de PostgreSQL
   port: 5432,
 });
-
-
+*/
+/*
 // Verificar conexión a la base de datos
 async function checkDatabaseConnection() {
   try {
@@ -59,14 +58,14 @@ async function checkDatabaseConnection() {
 }
 // Llama a la función de verificación de conexión al iniciar el servidor
 checkDatabaseConnection();
-
+*/
 app.use(express.json());
 
 
 
-
-
-//GET
+/*
+//CONSULTAS A LA BBDD
+//GET ok!!
 // Ruta para obtener todos los personajes
 app.get('/personajes', async (req, res) => {
   try {
@@ -77,8 +76,6 @@ app.get('/personajes', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener los personajes.' });
   }
 });
-
-
 
 // INSERT ok!!
 app.post('/insert-personaje', async (req, res) => {
@@ -107,9 +104,7 @@ app.post('/insert-personaje', async (req, res) => {
   }
 });
 
-
-
-//UPDATE
+//UPDATE ok!!
 app.put('/update-personaje', async (req, res) => {
   const { idpersonaje, nombre, dominio, ken, conviccion, imagen } = req.body;
 
@@ -137,6 +132,11 @@ app.put('/update-personaje', async (req, res) => {
   }
 });
 
+*/
+
+
+
+
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {
@@ -148,6 +148,8 @@ app.get('/*', (req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'));
 });
 
+
+/*
 // Manejar el cierre del servidor
 process.on('SIGTERM', async () => {
   console.log('Recibiendo señal de terminación. Cerrando la conexión a la base de datos...');
@@ -155,3 +157,4 @@ process.on('SIGTERM', async () => {
   console.log('Conexión a la base de datos cerrada.');
   process.exit(0);
 });
+*/
