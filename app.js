@@ -50,7 +50,7 @@ const pool = new Pool({
   port: 5432,
 });
 
-
+/*
 // Verificar conexión a la base de datos
 async function checkDatabaseConnection() {
   try {
@@ -58,6 +58,28 @@ async function checkDatabaseConnection() {
     console.log('Conexión a la base de datos PostgreSQL exitosa.');
   } catch (err) {
     console.error('Error al conectar a la base de datos PostgreSQL:', err.message);
+    process.exit(1); // Salir del proceso con un código de error
+  }
+}*/
+
+
+
+async function checkDatabaseConnection() {
+  try {
+    // Verifica la conexión a la base de datos
+    await pool.query('SELECT NOW()');
+    console.log('Conexión a la base de datos PostgreSQL exitosa.');
+
+    // Realiza una consulta adicional para verificar que puedes obtener datos
+    const result = await pool.query('SELECT * FROM personajes LIMIT 1');
+    if (result.rows.length > 0) {
+      console.log('Consulta a la tabla personajes exitosa. Datos obtenidos:');
+      console.log(result.rows); // Imprime una muestra de los datos obtenidos
+    } else {
+      console.log('La tabla personajes está vacía.');
+    }
+  } catch (err) {
+    console.error('Error al conectar a la base de datos PostgreSQL o al realizar la consulta:', err.message);
     process.exit(1); // Salir del proceso con un código de error
   }
 }
