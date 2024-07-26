@@ -6,6 +6,10 @@ import { dirname, join } from 'path';
 import pkg from 'pg'; 
 import bodyParser from 'body-parser';
 
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const { Pool } = pkg; 
 
 // Obtiene la ruta del directorio actual
