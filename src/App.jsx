@@ -24,6 +24,7 @@ useEffect(() => {
       console.log(`Fetching from: ${url}`);
       const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/personajes`);
       console.log(`Entro en el tray y trajo: ${response.data}`)
+      console.log('Backend URL:', process.env.REACT_APP_BACKEND_URL);
       setPersonajes(response.data);
     
     } catch (error) {
