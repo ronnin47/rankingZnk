@@ -24,7 +24,21 @@ app.use(express.static(join(__dirname, 'dist')));
 
 const server = http.createServer(app);
 
+
+/*LOCAL HOST
 // Configuración de la conexión a la base de datos
+const pool = new Pool({
+  user: 'postgres',          // Reemplaza con tu usuario de PostgreSQL
+  host: 'localhost',
+  database: 'znkrankingbbbdd', // Reemplaza con el nombre de tu base de datos
+  password: 'hikonometaiseno',   // Reemplaza con tu contraseña de PostgreSQL
+  port: 5432,
+});
+*/
+
+
+//RENDER 
+
 const pool = new Pool({
   user: 'znkrankingbbbdd_user',          // Reemplaza con tu usuario de PostgreSQL
   host: 'localhost',
@@ -32,6 +46,8 @@ const pool = new Pool({
   password: 'postgresql://znkrankingbbbdd_user:xkZPYQ7QNLIMvYeWNwXQH4K7wHnAMCgQ@dpg-cqhe8b88fa8c73br4p10-a/znkrankingbbbdd',   // Reemplaza con tu contraseña de PostgreSQL
   port: 5432,
 });
+
+
 // Verificar conexión a la base de datos
 async function checkDatabaseConnection() {
   try {
