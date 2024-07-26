@@ -3,16 +3,16 @@ import http from 'http';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import pkg from 'pg'; // Importa el paquete pg como pkg
+import pkg from 'pg'; 
 import bodyParser from 'body-parser';
 
-const { Pool } = pkg; // Extrae Pool del paquete pg
+const { Pool } = pkg; 
 
 // Obtiene la ruta del directorio actual
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app = express();
-app.use(cors()); // Permitir CORS para todas las rutas
+app.use(cors()); 
 
 
 // Configura el límite del tamaño del cuerpo de la solicitud
@@ -36,14 +36,13 @@ const pool = new Pool({
 });
 */
 
-
 //RENDER 
 
 const pool = new Pool({
   user: 'znkrankingbbbdd_user',          // Reemplaza con tu usuario de PostgreSQL
-  host: 'localhost',
+  host: 'dpg-cqhe8b88fa8c73br4p10-a',
   database: 'znkrankingbbbdd', // Reemplaza con el nombre de tu base de datos
-  password: 'postgresql://znkrankingbbbdd_user:xkZPYQ7QNLIMvYeWNwXQH4K7wHnAMCgQ@dpg-cqhe8b88fa8c73br4p10-a/znkrankingbbbdd',   // Reemplaza con tu contraseña de PostgreSQL
+  password: 'xkZPYQ7QNLIMvYeWNwXQH4K7wHnAMCgQ',   // Reemplaza con tu contraseña de PostgreSQL
   port: 5432,
 });
 
@@ -85,7 +84,7 @@ app.get('/personajes', async (req, res) => {
 app.post('/insert-personaje', async (req, res) => {
   const { nombre, dominio, ken, conviccion, imagen } = req.body;
 
-  console.log(req.body)
+ // console.log(req.body)
     // Convierte la imagen de base64 a un buffer
     const imagenBuffer = Buffer.from(imagen, 'base64');
 
@@ -114,7 +113,7 @@ app.post('/insert-personaje', async (req, res) => {
 app.put('/update-personaje', async (req, res) => {
   const { idpersonaje, nombre, dominio, ken, conviccion, imagen } = req.body;
 
-  console.log("esto viene del req",req.body)
+  //console.log("esto viene del req",req.body)
    // Convierte la imagen de base64 a un buffer
    const imagenBuffer = Buffer.from(imagen, 'base64');
   try {
