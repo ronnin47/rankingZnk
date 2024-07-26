@@ -30,6 +30,7 @@ const server = http.createServer(app);
 
 
 //LOCAL HOST
+/*
 // Configuración de la conexión a la base de datos
 const pool = new Pool({
   user: 'postgres',          // Reemplaza con tu usuario de PostgreSQL
@@ -38,8 +39,8 @@ const pool = new Pool({
   password: 'hikonometaiseno',   // Reemplaza con tu contraseña de PostgreSQL
   port: 5432,
 });
+*/
 
-/*
 //CONFIGURACION A LA BASE DE DATOS POSTGRESQL EN RENDER 
 const pool = new Pool({
   user: 'znkrankingbbbdd_user',          // Reemplaza con tu usuario de PostgreSQL
@@ -48,7 +49,7 @@ const pool = new Pool({
   password: 'xkZPYQ7QNLIMvYeWNwXQH4K7wHnAMCgQ',   // Reemplaza con tu contraseña de PostgreSQL
   port: 5432,
 });
-*/
+
 
 // Verificar conexión a la base de datos
 async function checkDatabaseConnection() {
