@@ -73,7 +73,7 @@ app.get('/personajes', async (req, res) => {
     res.json(result.rows);
   } catch (err) {
     console.error('Error al obtener los personajes:', err.message);
-    res.status(500).json({ error: 'Error al obtener los personajes.' });
+    res.status(500).json({ error: 'Error al obtener los personajes.Esto es la respuesta del servidor!!' });
   }
 });
 
