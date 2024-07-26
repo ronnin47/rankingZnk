@@ -11,11 +11,6 @@ export const Ranking = ({personajes,setPersonajes,lastAddedId,imagenBase, setIma
 
 //console.log("ultimo id en el componente ranking "+lastAddedId)
   
-
-
-
-
-
   return (
     <>
       <div className="container tablaRanking">

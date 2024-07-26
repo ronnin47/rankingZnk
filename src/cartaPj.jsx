@@ -48,7 +48,7 @@ export const CartaPj = ({ onClose, idpersonaje, imageSrc,setImageSrc, setImagenB
   
     try {
       // Enviar la solicitud de actualización al servidor
-      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/update-personaje`, newPersonaje, { 
+      await axios.put(`https://rankingznk.onrender.com/update-personaje`, newPersonaje, { 
         headers: {
           'Content-Type': 'application/json',
         },
@@ -56,7 +56,7 @@ export const CartaPj = ({ onClose, idpersonaje, imageSrc,setImageSrc, setImagenB
 
       try {
         //const response = await axios.get('http://localhost:4000/personajes');
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/personajes`);
+        const response = await axios.get(`https://rankingznk.onrender.com/personajes`);
         setPersonajes(response.data);
         console.log("PERSOANJES RECUPERADOS TRAS GUARDAR")
       

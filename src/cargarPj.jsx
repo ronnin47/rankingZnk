@@ -52,7 +52,7 @@ const cargarPersonaje = async () => {
   };
 
   try {
-    const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/insert-personaje`, newPersonaje, { 
+    const response = await axios.post(`https://rankingznk.onrender.com/insert-personaje`, newPersonaje, { 
       headers: {
         'Content-Type': 'application/json', // Asegúrate de que el encabezado Content-Type sea application/json
       },
@@ -73,7 +73,7 @@ const cargarPersonaje = async () => {
       const fetchPersonajes = async () => {
         try {
           //const response = await axios.get('http://localhost:4000/personajes');
-          const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/personajes`);
+          const response = await axios.get(`https://rankingznk.onrender.com/personajes`);
           setPersonajes(response.data);
         
         } catch (error) {
