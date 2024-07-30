@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
+import { Estrellitas } from './estrellitas.jsx'
 
 import 'animate.css';
 
@@ -126,7 +127,16 @@ const cerrar=()=>{
        <div className={`modalus ${fade==true ? 'fadeOut' : 'fadeIn'}`}>
        <Modal.Header closeButton style={{backgroundColor:"black", color:"aliceblue"}}>
         <Modal.Title>
+          <div style={{display:"flex", flexDirection:"row", gap:"2em"}}>
           <p style={{textAlign:"center",fontSize:"1em",color:"Yellow", fontFamily:"cursive"}}>{nombre}</p>
+          <div className='estrellitas'>
+          <Estrellitas ken={ken}></Estrellitas>
+          </div>
+
+          </div>
+          
+          
+         
         </Modal.Title>
       </Modal.Header>
 

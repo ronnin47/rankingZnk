@@ -140,3 +140,8 @@ p {
   text-overflow: ellipsis; /* Opcional: Agrega puntos suspensivos si el texto se desborda */
   white-space: normal; /* Permite el salto de línea */
 }
+.estrellitas{
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+}

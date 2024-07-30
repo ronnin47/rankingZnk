@@ -111,7 +111,7 @@ export const MiniCard = ({ imagenBase, setImagenBase, rank, idpersonaje, nombre,
           variant="top"
           src={imageSrc}
           alt="imagen"
-          style={{ maxWidth: "100%", maxHeight: "100%" }}
+          style={{ maxWidth: "100%", maxHeight: "100px" }}
         />
         <Card.Body
           onClick={handleCardClick}
