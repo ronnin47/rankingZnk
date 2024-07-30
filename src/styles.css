@@ -17,12 +17,15 @@ html,body{
   flex-direction: column;
   gap: 1em;
   align-items: start;
-  justify-content: center; 
+  justify-content: center;   
 
 }
-.cargando>input{
-  width: 50%;
+.cargando > input{
+  width: 80%;
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.747);
+  color: #FFD700;
+  font-family: cursive;
 }
 .imagenPj{
   border: 3px solid red;
@@ -39,6 +42,7 @@ html,body{
   grid-template-columns: 40% 60%;
 }
 .tablaRanking{
+  margin-top: 4em;
   display: grid;
   grid-template-columns: repeat(5,1fr);
   gap: 1em;
@@ -46,11 +50,27 @@ html,body{
   
   width: 60%;
   padding: 3em;
+
+  
+
+  
+}
+.plus{
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.9);
+  background-color: rgba(0, 0, 0, 0.705);
+  border-radius: 15px;
+
 }
 .numeroRanking{
   color:#8B0000;
-  margin-right: 1em;
+  margin-right: 0.8em;
   font-size: 2em;
+}
+.cartas {
+  position: relative; /* Asegura que el z-index se aplique */
+  z-index: 1; /* Valor base de z-index para cartas normales */
+  transition: text-shadow 1s cubic-bezier(1, 1, 0.32, 1), transform 1s cubic-bezier(1, 1, 0.32, 1);
+ 
 }
 
 .cartas:hover {
@@ -58,6 +78,7 @@ html,body{
   transform: scale(1.5);
  
   transition: text-shadow 1s cubic-bezier(1, 1, 0.32, 1), transform 1s cubic-bezier(1, 1, 0.32, 1);
+  z-index: 10; 
 
 }
 .shadowBody:hover{
@@ -96,6 +117,7 @@ html,body{
   border-radius: 10px;
  text-align: center;
 }
+
 .modalus{
 border: 5px solid red;
 border-radius: 9px;
@@ -110,4 +132,11 @@ opacity: 0.9;
   max-width: 300px;
   max-height: 300px;
 
+}
+
+p {
+  font-size: 1rem; /* Tamaño de fuente predeterminado */
+  overflow-wrap: break-word; /* Asegura que las palabras largas se rompan */
+  text-overflow: ellipsis; /* Opcional: Agrega puntos suspensivos si el texto se desborda */
+  white-space: normal; /* Permite el salto de línea */
 }

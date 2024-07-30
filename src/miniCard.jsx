@@ -105,7 +105,7 @@ export const MiniCard = ({ imagenBase, setImagenBase, rank, idpersonaje, nombre,
   return (
     <div className='cartas'>
       <p className={classBrillosDestino} style={{ fontFamily: "impact", textAlign: "center" }}>{rank}</p>
-      <Card ref={cardRef} style={{ width: '6em', border: "6px solid black" }} className={`animate__animated animate__fadeInTopLeft ${classCardDestino}`}>
+      <Card ref={cardRef} style={{ width: '7em', border: "6px solid black" }} className={`animate__animated animate__fadeInTopLeft ${classCardDestino}`}>
         <Card.Img
           onClick={handleCardClick}
           variant="top"
@@ -127,7 +127,7 @@ export const MiniCard = ({ imagenBase, setImagenBase, rank, idpersonaje, nombre,
             border: "3px solid orange"
           }}
         >
-          <Card.Title style={{ textAlign: "center", margin: "0px" }}>{nombre}</Card.Title>
+          <Card.Title style={{ textAlign: "center", margin: "0px" , fontFamily:"cursive", maxWidth:"200%"}}>{nombre}</Card.Title>
           <p style={{ fontFamily: "impact", textAlign: "center", margin: "0", fontSize: "0.9rem" }}>{dominio}</p>
           <p style={{ fontFamily: "impact", textAlign: "center", margin: "0", fontSize: "2rem" }}>{ken}</p>
         </Card.Body>

@@ -4,6 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 
+import 'animate.css';
+
 export const CartaPj = ({ onClose, idpersonaje, imageSrc,setImageSrc, setImagenBase, nombre,dominio,ken, personajes,conviccion, setPersonajes }) => {
 
 
@@ -48,14 +50,16 @@ export const CartaPj = ({ onClose, idpersonaje, imageSrc,setImageSrc, setImagenB
   
     try {
       // Enviar la solicitud de actualización al servidor
+      //await axios.put(`http://localhost:4000/update-personaje`, newPersonaje, { 
       await axios.put(`https://rankingznk.onrender.com/update-personaje`, newPersonaje, { 
+          
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
       try {
-        //const response = await axios.get('http://localhost:4000/personajes');
+         //const response = await axios.get('http://localhost:4000/personajes');
         const response = await axios.get(`https://rankingznk.onrender.com/personajes`);
         setPersonajes(response.data);
         console.log("PERSOANJES RECUPERADOS TRAS GUARDAR")
@@ -102,12 +106,13 @@ export const CartaPj = ({ onClose, idpersonaje, imageSrc,setImageSrc, setImagenB
 
 
 const [fade,setFade]=useState(false)
-
+const [animacion,setAnimacion]=useState("")
 const cerrar=()=>{
   console.log("paso por aca")
-  setFade(true) 
+  setFade(true)
+  //setAnimacion("animate__animated animate__flipOutY");
   setTimeout(() => {
-
+    //setAnimacion("");
     setFade(false); 
     onClose()
   }, 700);
@@ -115,12 +120,13 @@ const cerrar=()=>{
 
 
   return (
-    <Modal show={true} onHide={cerrar}>
+    <div  >
+      <Modal show={true} onHide={cerrar} className={`${animacion}`}>
        
        <div className={`modalus ${fade==true ? 'fadeOut' : 'fadeIn'}`}>
        <Modal.Header closeButton style={{backgroundColor:"black", color:"aliceblue"}}>
         <Modal.Title>
-          <p style={{textAlign:"center", fontFamily:"cursive"}}>{nombre}</p>
+          <p style={{textAlign:"center",fontSize:"1em",color:"Yellow", fontFamily:"cursive"}}>{nombre}</p>
         </Modal.Title>
       </Modal.Header>
 
@@ -136,7 +142,7 @@ const cerrar=()=>{
           <input type="text" placeholder='Nombre' value={nombreCartaPj} onChange={handleChangeNombre} />
           <input type="text" placeholder='Dominio' value={dominioCartaPj} onChange={handleChangeDominio}  />
           <input type="number" placeholder='Ken' value={kenCartaPj} onChange={handleChangeKen} />
-          <input type="text" placeholder='Conviccion' value={conviccionCartaPj} onChange={handleChangeConviccion} style={{width:"100%"}} />
+          <textarea  placeholder='Conviccion' value={conviccionCartaPj} onChange={handleChangeConviccion} style={{fontFamily:"cursive",width:"100%", backgroundColor:"black",color:"yellow",borderRadius:"5px",marginTop:"1em",padding:"5px",textAlign:"center"}} />
          </div>
         
 
@@ -160,6 +166,9 @@ const cerrar=()=>{
        </div>
       
     </Modal>
+
+    </div>
+    
   );
 };
 

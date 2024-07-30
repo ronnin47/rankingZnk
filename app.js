@@ -60,8 +60,8 @@ async function checkDatabaseConnection() {
     console.error('Error al conectar a la base de datos PostgreSQL:', err.message);
     process.exit(1); // Salir del proceso con un código de error
   }
-}*/
-
+}
+*/
 
 
 async function checkDatabaseConnection() {
@@ -107,8 +107,8 @@ app.get('/personajes', async (req, res) => {
 // INSERT ok!!
 app.post('/insert-personaje', async (req, res) => {
   const { nombre, dominio, ken, conviccion, imagen } = req.body;
-
- // console.log(req.body)
+    console.log("llego la peticion de insert!!")
+    console.log(req.body)
     // Convierte la imagen de base64 a un buffer
     const imagenBuffer = Buffer.from(imagen, 'base64');
 
@@ -161,7 +161,7 @@ app.put('/update-personaje', async (req, res) => {
 
 
 
-
+//const PORT = process.env.PORT || 4000;
 
 
 

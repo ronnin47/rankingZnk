@@ -3,12 +3,16 @@ import { Nava } from "./nava.jsx";
 import { CargarPj} from "./cargarPj.jsx";
 import { Ranking } from "./ranking.jsx";
 import { useState, useEffect } from "react";
-import { Probandolo } from "./probandolo.jsx";
+
 //es para los metodos http
 import axios from 'axios';
 
+import Accordion from 'react-bootstrap/Accordion';
+
 export const App=()=> {
 
+
+  //  <Probandolo></Probandolo>
 
 //viene con imagen base y es solo un fondis
 const [imagenBase,setImagenBase]=useState("/imagenBase.jpeg")
@@ -19,21 +23,23 @@ const [personajes, setPersonajes] = useState([])
 useEffect(() => {
   const fetchPersonajes = async () => {
     try {
+      //en localhost
       //const response = await axios.get('http://localhost:4000/personajes');
+
+
+      //esta es la que funciono en render
       const response = await axios.get('https://rankingznk.onrender.com/personajes');
+      
+      
+
+
       
       
       //const url = `${process.env.REACT_APP_BACKEND_URL}/personajes`;
       //console.log(`Fetching from: ${url}`);
       //const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/personajes`);
-      
-      
       //const response = await axios.get(`${await import.meta.env.VITE_BACKEND_URL}/personajes`);
-
-
-
       //const response = await axios.get(`${url}/personajes`);
-      
       //console.log(`Entro en el tray y trajo: ${response.data}`)
       //console.log('Backend URL:', process.env.REACT_APP_BACKEND_URL);
      // console.log('Backend URL:', import.meta.env.VITE_BACKEND_URL);
@@ -56,16 +62,32 @@ useEffect(() => {
 
  //realiza el sort por KEN 
  const sortedPersonajes = personajes.length > 0 ? [...personajes].sort((a, b) => b.ken - a.ken) : [];
-
+ 
+//defaultActiveKey="0"
 
   return (
     <>
      <Nava tituloNav={" Ranking ZNK"}></Nava>
-     <CargarPj personajes={personajes} setPersonajes={setPersonajes} imagenBase={imagenBase} setImagenBase={setImagenBase} lastAddedId={lastAddedId} setLastAddedId={setLastAddedId} ></CargarPj>
-     <Ranking personajes={sortedPersonajes} setPersonajes={setPersonajes} lastAddedId={lastAddedId} imagenBase={imagenBase} setImagenBase={setImagenBase}></Ranking>
-     <Probandolo></Probandolo>
+     
+     <Accordion >
+      <Accordion.Item eventKey="0">
+        <Accordion.Header style={{fontFamily:"cursive"}}>Cargar nuevo personaje</Accordion.Header>
+        <Accordion.Body style={{backgroundColor:"black"}}>
+        <CargarPj personajes={personajes} setPersonajes={setPersonajes} imagenBase={imagenBase} setImagenBase={setImagenBase} lastAddedId={lastAddedId} setLastAddedId={setLastAddedId} ></CargarPj>
+          
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
+    <div >
+    <Ranking personajes={sortedPersonajes} setPersonajes={setPersonajes} lastAddedId={lastAddedId} imagenBase={imagenBase} setImagenBase={setImagenBase}></Ranking>
+    </div>
+    
+    
+   
     </>
   )
 }
+
+
 
 

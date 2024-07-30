@@ -51,9 +51,13 @@ const cargarPersonaje = async () => {
     imagen: imagenBase,
   };
 
+
+  
   try {
-    const response = await axios.post(`https://rankingznk.onrender.com/insert-personaje`, newPersonaje, { 
-      headers: {
+    
+    //const response = await axios.post(`http://localhost:4000/insert-personaje`, newPersonaje, { 
+    const response = await axios.post(`https://rankingznk.onrender.com/insert-personaje`, newPersonaje, {   
+    headers: {
         'Content-Type': 'application/json', // Asegúrate de que el encabezado Content-Type sea application/json
       },
     });
@@ -128,7 +132,7 @@ const cargarPersonaje = async () => {
             <input type="text" placeholder="ingrese dominio" value={cargarDominio}  onChange={handleInputDominio}/>
             <input type="number" placeholder="ingrese Ken" value={cargarKen}  onChange={handleInputKen}/>
             <input type="text" placeholder="ingresa la conviccion" value={cargarConviccion}  onChange={handleInputConviccion}/>
-            <Button variant="outline-warning" style={{width:"auto", marginLeft:"9em"}} onClick={cargarPersonaje}>Cargar al ranking</Button>
+            <Button variant="outline-warning" style={{width:"auto", marginLeft:"13em"}} onClick={cargarPersonaje}>Cargar al ranking</Button>
           </div>
     
       
