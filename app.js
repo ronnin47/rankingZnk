@@ -43,10 +43,10 @@ const pool = new Pool({
 
 //CONFIGURACION A LA BASE DE DATOS POSTGRESQL EN RENDER 
 const pool = new Pool({
-  user: 'znkrankingbbbdd_user',          // Reemplaza con tu usuario de PostgreSQL
-  host: 'dpg-cqhe8b88fa8c73br4p10-a',
-  database: 'znkrankingbbbdd', // Reemplaza con el nombre de tu base de datos
-  password: 'xkZPYQ7QNLIMvYeWNwXQH4K7wHnAMCgQ',   // Reemplaza con tu contraseña de PostgreSQL
+  user: 'basecode_user',          // Reemplaza con tu usuario de PostgreSQL
+  host: 'dpg-cqp75jrqf0us73e54ik0-a',
+  database: 'basecode', // Reemplaza con el nombre de tu base de datos
+  password: 'uLxUA7IgbbJsLdpI4XO131i0FU4ts6yx',   // Reemplaza con tu contraseña de PostgreSQL
   port: 5432,
 });
 
@@ -93,7 +93,6 @@ app.use(express.json());
 
 //CONSULTAS A LA BBDD
 //GET ok!!
-// Ruta para obtener todos los personajes
 app.get('/personajes', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM personajes');
