@@ -28,7 +28,7 @@ useEffect(() => {
 
 
       //esta es la que funciono en render
-      const response = await axios.get('https://rankingznk.onrender.com/personajes');
+      const response = await axios.get('https://znkranking.onrender.com/personajes');
       
       
 
