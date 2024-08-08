@@ -12,7 +12,7 @@ const texts = [
     `Las puertas del destino nunca se han cerrado...`,
     'Seguramente te espera perderlo todo...',
     'Pero tú podrás alcanzar tus sueños...',
-    'Demuestra que su sueño es real!!'
+    'Demuestra que tu sueño es real!!'
   ];
 
 export const Loader = () => {
