@@ -163,6 +163,30 @@ p {
   z-index: 1000; /* Asegúrate de que esté sobre otros elementos */
 }
 
+.loader-text {
+  color: yellow;
+  font-family: 'Japanese Brush Stroke', cursive;
+  font-size: 2em;
+  position: absolute;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+}
+
 .spinner {
   border: 16px solid #f3f3f3; /* Color de fondo */
   border-top: 16px solid #3498db; /* Color del spinner */

@@ -19,9 +19,10 @@ export const Loader = () => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
   useEffect(() => {
+    const intervalDuration = 2500;
     const interval = setInterval(() => {
       setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
-    }, 2500); 
+    },  intervalDuration); 
 
     return () => clearInterval(interval); // Limpia el intervalo al desmontar el componente
   }, []);
