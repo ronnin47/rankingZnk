@@ -171,6 +171,7 @@ p {
   transition: opacity 1s ease-in-out;
 }
 
+
 .fade-enter {
   opacity: 0;
 }
