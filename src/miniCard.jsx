@@ -6,7 +6,7 @@ import { CartaPj } from './cartaPj';
 import '../css/wickedcss.min.css';
 import { Buffer } from 'buffer';
 
-export const MiniCard = ({ imagenBase, setImagenBase, rank, idpersonaje, nombre, dominio, ken, imagen, conviccion, personajes, setPersonajes, focus }) => {
+export const MiniCard = ({ imagenBase, setImagenBase, rank, idpersonaje, nombre, dominio, ken, imagen, conviccion, personajes, setPersonajes, actualizarPersonajes, focus }) => {
 
   const [classBrillosDestino, setClassBrillosDestino] = useState("numeroRanking");
   const [classCardDestino, setClassCardDestino] = useState("shadowBody");
@@ -22,6 +22,11 @@ export const MiniCard = ({ imagenBase, setImagenBase, rank, idpersonaje, nombre,
   //un nuevo state para la imagen que tiene que mostrarse en la card
   const [imageSrc, setImageSrc] = useState(imagenBase);
 
+
+ const [nombreN,setNombreN]=useState(nombre);
+ const [dominioN,setDominioN]=useState(dominio);
+ const [kenN,setKenN]=useState(ken);
+ const [conviccionN,setConviccionN]=useState(conviccion);
 
 
  
@@ -127,9 +132,9 @@ export const MiniCard = ({ imagenBase, setImagenBase, rank, idpersonaje, nombre,
             border: "3px solid orange"
           }}
         >
-          <Card.Title style={{ textAlign: "center", margin: "0px" , fontFamily:"cursive", maxWidth:"200%"}}>{nombre}</Card.Title>
-          <p style={{ fontFamily: "impact", textAlign: "center", margin: "0", fontSize: "0.9rem" }}>{dominio}</p>
-          <p style={{ fontFamily: "impact", textAlign: "center", margin: "0", fontSize: "2rem" }}>{ken}</p>
+          <Card.Title style={{ textAlign: "center", margin: "0px" , fontFamily:"cursive", maxWidth:"200%"}}>{nombreN}</Card.Title>
+          <p style={{ fontFamily: "impact", textAlign: "center", margin: "0", fontSize: "0.9rem" }}>{dominioN}</p>
+          <p style={{ fontFamily: "impact", textAlign: "center", margin: "0", fontSize: "2rem" }}>{kenN}</p>
         </Card.Body>
         {showCartaPj && (
           <CartaPj
@@ -138,12 +143,19 @@ export const MiniCard = ({ imagenBase, setImagenBase, rank, idpersonaje, nombre,
             imageSrc={imageSrc}
             setImageSrc={setImageSrc}
             setImagenBase={setImagenBase}
-            nombre={nombre}
-            dominio={dominio}
-            ken={ken}
-            conviccion={conviccion}
+            
+            nombreN={nombreN}
+            setNombreN={setNombreN}
+            dominioN={dominioN}
+            setDominioN={setDominioN}
+            kenN={kenN}
+            setKenN={setKenN}
+            conviccionN={conviccionN}
+            setConviccionN={setConviccionN}
+            
             personajes={personajes}
             setPersonajes={setPersonajes}
+            actualizarPersonajes={actualizarPersonajes}
           />
         )}
       </Card>

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
@@ -7,34 +7,36 @@ import { Estrellitas } from './estrellitas.jsx'
 
 import 'animate.css';
 
-export const CartaPj = ({ onClose, idpersonaje, imageSrc,setImageSrc, setImagenBase, nombre,dominio,ken, personajes,conviccion, setPersonajes }) => {
+export const CartaPj = ({ onClose, idpersonaje, imageSrc,setImageSrc, setImagenBase, nombreN,setNombreN,dominioN,setDominioN,kenN,setKenN, personajes,conviccionN,setConviccionN, setPersonajes,actualizarPersonajes }) => {
 
 
   const imgCartaPjRef = useRef(null);
 
   const [newImagen,setNewImagen]=useState(imageSrc)
-  
-  
-  
-  const [nombreCartaPj,setNombreCartaPj]=useState(nombre)
+  const [nombreCartaPj,setNombreCartaPj]=useState(nombreN)
   const handleChangeNombre=(event)=>{
   setNombreCartaPj(event.target.value)
   }
   
-  const [dominioCartaPj,setDominioCartaPj]=useState(dominio)
+  const [dominioCartaPj,setDominioCartaPj]=useState(dominioN)
   const handleChangeDominio=(event)=>{
   setDominioCartaPj(event.target.value)
   }
-  const [kenCartaPj,setKenCartaPj]=useState(ken)
+  const [kenCartaPj,setKenCartaPj]=useState(kenN)
   const handleChangeKen=(event)=>{
   setKenCartaPj(event.target.value)
   }
 
-  const [conviccionCartaPj,setConviccionCartaPj]=useState(conviccion)
+  const [conviccionCartaPj,setConviccionCartaPj]=useState(conviccionN)
   const handleChangeConviccion=(event)=>{
   setConviccionCartaPj(event.target.value)
   }
 
+//acaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  useEffect(()=>{
+    //necesito que reordene personajes segun ken
+    console.log("necesito sorted en personajes apra ordenar KEN+")
+  },[kenN])
 
   const guardarCambiosPj = async () => {
     console.log("Funciona el botón guardar cambios Pj");
@@ -58,16 +60,18 @@ export const CartaPj = ({ onClose, idpersonaje, imageSrc,setImageSrc, setImagenB
           'Content-Type': 'application/json',
         },
       });
-
+      /*
       try {
-         //const response = await axios.get('http://localhost:4000/personajes');
-        const response = await axios.get(`https://znkranking.onrender.com/personajes`);
+        const response = await axios.get('http://localhost:4000/personajes');
+        //const response = await axios.get(`https://znkranking.onrender.com/personajes`);
         setPersonajes(response.data);
         console.log("PERSOANJES RECUPERADOS TRAS GUARDAR")
       
       } catch (error) {
         console.error('Error al obtener los personajes:', error);
       }
+        */
+
   /*
   // Actualizar el estado local
       const updatedPersonajes = personajes.map((pj) => {
@@ -82,11 +86,31 @@ export const CartaPj = ({ onClose, idpersonaje, imageSrc,setImageSrc, setImagenB
    
       console.log("Personaje actualizado en el estado local");
 */
+
+
+      
+actualizarPersonajes(idpersonaje, kenCartaPj);
+     
       // Opcional: Cerrar el modal o realizar cualquier otra acción necesaria
+      setNombreN(nombreCartaPj);
+      setDominioN(dominioCartaPj);
+      setKenN(kenCartaPj);
+      setConviccionN(conviccionCartaPj)
+      setImageSrc(newImagen)
+    
+   
+   
+
+
+     
       cerrar();
     } catch (error) {
       console.error('Error al actualizar el personaje:', error.message);
     }
+
+
+  
+
   };
 
 
@@ -128,9 +152,9 @@ const cerrar=()=>{
        <Modal.Header closeButton style={{backgroundColor:"black", color:"aliceblue"}}>
         <Modal.Title>
           <div style={{display:"flex", flexDirection:"row", gap:"2em"}}>
-          <p style={{textAlign:"center",fontSize:"1em",color:"Yellow", fontFamily:"cursive"}}>{nombre}</p>
+          <p style={{textAlign:"center",fontSize:"1em",color:"Yellow", fontFamily:"cursive"}}>{nombreN}</p>
           <div className='estrellitas'>
-          <Estrellitas ken={ken}></Estrellitas>
+          <Estrellitas ken={kenN}></Estrellitas>
           </div>
 
           </div>

@@ -13,11 +13,6 @@ export const CargarPj = ({personajes,setPersonajes,imagenBase, setImagenBase,las
 
  const inputFileRef = useRef(null);
 
-
-
-
-
-
  //LOS 4 INPUTS QUE TIENE QUE CARGAR
  const [cargarNombre,setCargarNombre]=useState("");
   const handleInputNombre=(event)=>{
@@ -35,10 +30,6 @@ export const CargarPj = ({personajes,setPersonajes,imagenBase, setImagenBase,las
   const handleInputKen=(event)=>{
     setCargarKen(event.target.value)
   }
-
-
-
-
 
 
 //PETICION DE INSERT AL SERVIDOR 
@@ -93,14 +84,6 @@ const cargarPersonaje = async () => {
     console.error('Error al insertar el personaje:', error.message);
   }
 };
-
-
-
-
-
-
-
-
 
 
   
