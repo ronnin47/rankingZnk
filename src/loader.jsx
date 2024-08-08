@@ -19,7 +19,7 @@ export const Loader = () => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
   useEffect(() => {
-    const intervalDuration = 2500;
+    const intervalDuration = 3500;
     const interval = setInterval(() => {
       setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
     },  intervalDuration); 
