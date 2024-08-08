@@ -64,7 +64,7 @@ const cargarPersonaje = async () => {
     setImagenBase("/imagenBase.jpeg");
     setLastAddedId(idpersonaje);
 
-  //lalam a la peticion 
+
       const fetchPersonajes = async () => {
         try {
           //const response = await axios.get('http://localhost:4000/personajes');

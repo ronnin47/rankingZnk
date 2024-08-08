@@ -5,12 +5,18 @@ import { Ranking } from "./ranking.jsx";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import Accordion from 'react-bootstrap/Accordion';
+import { Loader } from './loader';
 
 export const App=()=> {
 
 //viene con imagen base y es solo un fondis
 const [imagenBase,setImagenBase]=useState("/imagenBase.jpeg")
-const [personajes, setPersonajes] = useState([])
+const [personajes, setPersonajes] = useState([]);
+
+
+const [lastAddedId, setLastAddedId] = useState(null);
+
+
 
 const fetchPersonajes = async () => {
   try {
@@ -19,9 +25,11 @@ const fetchPersonajes = async () => {
     //esta es la que funciono en render
     const response = await axios.get('https://znkranking.onrender.com/personajes');
    setPersonajes(response.data);
+   setLoading(false); // Carga completada
   
   } catch (error) {
     console.error('Error al obtener los personajes:', error);
+    setLoading(false); // Carga completada
   }
 };
 
@@ -52,7 +60,7 @@ const actualizarPersonajes = (idpersonaje, nuevoKen) => {
   });
 };
 
- const [lastAddedId, setLastAddedId] = useState(null);
+
 
 
  //const sortedPersonajes = personajes.length > 0 ? [...personajes].sort((a, b) => b.ken - a.ken) : [];
@@ -60,22 +68,30 @@ const actualizarPersonajes = (idpersonaje, nuevoKen) => {
  
 //defaultActiveKey="0"
 
+const [loading, setLoading] = useState(true); // Estado de carga
+
   return (
     <>
      <Nava tituloNav={" Ranking ZNK"}></Nava>
-     <Accordion >
-      <Accordion.Item eventKey="0">
-        <Accordion.Header style={{fontFamily:"cursive"}}>Cargar nuevo personaje</Accordion.Header>
-        <Accordion.Body style={{backgroundColor:"black"}}>
-        <CargarPj personajes={personajes} setPersonajes={setPersonajes} imagenBase={imagenBase} setImagenBase={setImagenBase} lastAddedId={lastAddedId} setLastAddedId={setLastAddedId} ></CargarPj>
-          
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
-    <div >
-    <Ranking personajes={sortedPersonajes} setPersonajes={setPersonajes} actualizarPersonajes={actualizarPersonajes} lastAddedId={lastAddedId} imagenBase={imagenBase} setImagenBase={setImagenBase}></Ranking>
-    </div>
+      {loading ? (
+        <Loader /> // Mostrar el loader mientras se carga la información
+      ) : ( <>
+       
+        <Accordion >
+         <Accordion.Item eventKey="0">
+           <Accordion.Header style={{fontFamily:"cursive"}}>Cargar nuevo personaje</Accordion.Header>
+           <Accordion.Body style={{backgroundColor:"black"}}>
+           <CargarPj personajes={personajes} setPersonajes={setPersonajes} imagenBase={imagenBase} setImagenBase={setImagenBase} lastAddedId={lastAddedId} setLastAddedId={setLastAddedId} ></CargarPj>
+             
+           </Accordion.Body>
+         </Accordion.Item>
+       </Accordion>
+       <div >
+       <Ranking personajes={sortedPersonajes} setPersonajes={setPersonajes} actualizarPersonajes={actualizarPersonajes} lastAddedId={lastAddedId} imagenBase={imagenBase} setImagenBase={setImagenBase}></Ranking>
+       </div>
+       </>)}
     </>
+   
   )
 }
 
